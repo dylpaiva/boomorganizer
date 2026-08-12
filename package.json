@@ -1,0 +1,14 @@
+{
+  "name": "pyroledger",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.4.1",
+  "scripts": {
+    "web:dev": "pnpm --filter @pyroledger/web dev",
+    "web:build": "pnpm --filter @pyroledger/web build",
+    "web:lint": "pnpm --filter @pyroledger/web lint",
+    "api:dev": "cd apps/api && uvicorn app.main:app --reload --port 8000",
+    "api:test": "cd apps/api && pytest",
+    "api:lint": "cd apps/api && ruff check ."
+  }
+}
