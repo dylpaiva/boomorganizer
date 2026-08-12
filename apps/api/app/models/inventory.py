@@ -156,6 +156,7 @@ class InventoryEvent(Base):
 
 class PhysicalInventory(Base):
     __tablename__ = "physical_inventories"
+    __table_args__ = (UniqueConstraint("organization_id", "idempotency_key", name="uq_physical_inventory_idempotency"),)
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     organization_id: Mapped[UUID] = mapped_column(
@@ -164,6 +165,7 @@ class PhysicalInventory(Base):
     location_id: Mapped[UUID] = mapped_column(ForeignKey("locations.id", ondelete="RESTRICT"), nullable=False)
     actor_user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"), nullable=False)
     occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    idempotency_key: Mapped[str] = mapped_column(String(255), nullable=False)
     status: Mapped[PhysicalInventoryStatus] = mapped_column(nullable=False, default=PhysicalInventoryStatus.COMPLETED)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
