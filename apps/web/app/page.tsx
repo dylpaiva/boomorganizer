@@ -1,7 +1,5 @@
+import { InventoryConsole } from "@/components/inventory-console";
+
 export default function HomePage() {
-  return (
-    <main>
-      <p>PyroLedger production inventory core is initializing.</p>
-    </main>
-  );
+  return <InventoryConsole />;
 }
