@@ -125,6 +125,8 @@ class BalanceResponse(BaseModel):
 
 
 class PhysicalCountLineResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: UUID
     inventory_lot_id: UUID
     expected_quantity: Decimal
@@ -134,6 +136,8 @@ class PhysicalCountLineResponse(BaseModel):
 
 
 class VarianceResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: UUID
     physical_inventory_line_id: UUID
     difference_quantity: Decimal
