@@ -141,7 +141,6 @@ class InventoryEvent(Base):
     occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     recorded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     idempotency_key: Mapped[str] = mapped_column(String(255), nullable=False)
-    request_fingerprint: Mapped[str] = mapped_column(String(64), nullable=False)
     correction_of_event_id: Mapped[UUID | None] = mapped_column(
         ForeignKey("inventory_events.id", ondelete="RESTRICT"), nullable=True
     )
@@ -167,7 +166,6 @@ class PhysicalInventory(Base):
     actor_user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id", ondelete="RESTRICT"), nullable=False)
     occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     idempotency_key: Mapped[str] = mapped_column(String(255), nullable=False)
-    request_fingerprint: Mapped[str] = mapped_column(String(64), nullable=False)
     status: Mapped[PhysicalInventoryStatus] = mapped_column(nullable=False, default=PhysicalInventoryStatus.COMPLETED)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
